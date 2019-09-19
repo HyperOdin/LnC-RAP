@@ -1,0 +1,49 @@
+references:
+    basepath: "/ELS/els9/users/biosciences/references"
+    provider: "ucsc"
+    release: "hg19"
+genome_fasta: "ucsc.hg19.fasta"
+genes_gtf: "Annotation/Genes/genes.gtf"
+
+rseqc_reference:
+    basepath: "/ELS/els9/users/biosciences/references/"
+    provider: "rseqc"
+    release: "hg19"
+housekeeping: "hg19.HouseKeepingGenes.bed"
+refseq: "hg19_RefSeq.bed"
+
+transcriptome_reference:
+    basepath: "/ELS/els9/users/biosciences/references"
+    provider: "ensembl"
+    release: "GRCh38"
+transcriptome_fasta: "Homo_sapiens.GRCh38.cdna.all.fa.gz"
+
+strand: "reverse"
+
+rules:
+    sleuth_run:
+        database: "ensembl"
+        dataset: "hsapiens_gene_ensembl"
+        version: 90
+    multiqc:
+        arguments: "--force "
+    featureCounts_run:
+        gtf_feature_type: "exon"
+        gtf_attribute_type: "gene_id"
+    kallisto:
+        arguments: ""
+    trim_galore_pe:
+        params: "-a AACTGTAGGCACCATCAAT -q 20 --length 18 --dont_gzip"
+    fastq_screen:
+        params: "--force --aligner bowtie2 --subset 100000 --nohits"
+        config_file: "../data/fastq_screen.config"
+
+wrappers:
+    fastqc: "fastqc_wrapper"
+    trim_galore: "trim_galore_pe_wrapper"
+
+samples: 
+    RNA17-0170-R0001_R1.fastq.gz: /ELS/els9/users/biosciences/projects/rna-arancio/datasets/RNA17-0170-R0001_R1.fastq.gz
+    RNA17-0170-R0001_R2.fastq.gz: /ELS/els9/users/biosciences/projects/rna-arancio/datasets/RNA17-0170-R0001_R2.fastq.gz   
+    RNA17-0180-R0001_R1.fastq.gz: /ELS/els9/users/biosciences/projects/rna-arancio/datasets/RNA17-0180-R0001_R1.fastq.gz
+    RNA17-0180-R0001_R2.fastq.gz: /ELS/els9/users/biosciences/projects/rna-arancio/datasets/RNA17-0180-R0001_R2.fastq.gz
