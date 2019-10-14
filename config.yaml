@@ -4,6 +4,7 @@ references:
     release: "hg19"
 genome_fasta: "ucsc.hg19.fasta"
 genes_gtf: "Annotation/Genes/genes.gtf"
+#tx2gene_hsa: "rna/tx2gene_hsa.RData"
 
 rseqc_reference:
     basepath: "/ELS/els9/users/biosciences/references/"
@@ -31,19 +32,22 @@ rules:
         gtf_feature_type: "exon"
         gtf_attribute_type: "gene_id"
     kallisto:
-        arguments: ""
+        arguments_pe: ""
+        arguments_se: "--single -b 30 -l 280 -s 80 "
     trim_galore_pe:
-        params: "-a AACTGTAGGCACCATCAAT -q 20 --length 18 --dont_gzip"
+        arguments: "-q 20"
+    trim_galore_se:
+        arguments: "-q 20"
     fastq_screen:
         params: "--force --aligner bowtie2 --subset 100000 --nohits"
         config_file: "../data/fastq_screen.config"
 
 wrappers:
-    fastqc: "fastqc_wrapper"
-    trim_galore: "trim_galore_pe_wrapper"
+    fastqc: "/ELS/els9/users/biosciences/references/snakemake-wrappers/bio/fastqc"
+    #trim_galore_se: ""
+    trim_galore_pe: "/ELS/els9/users/biosciences/references/snakemake-wrappers/bio/trim_galore/pe"
 
-samples: 
-    RNA17-0170-R0001_R1.fastq.gz: /ELS/els9/users/biosciences/projects/rna-arancio/datasets/RNA17-0170-R0001_R1.fastq.gz
-    RNA17-0170-R0001_R2.fastq.gz: /ELS/els9/users/biosciences/projects/rna-arancio/datasets/RNA17-0170-R0001_R2.fastq.gz   
-    RNA17-0180-R0001_R1.fastq.gz: /ELS/els9/users/biosciences/projects/rna-arancio/datasets/RNA17-0180-R0001_R1.fastq.gz
-    RNA17-0180-R0001_R2.fastq.gz: /ELS/els9/users/biosciences/projects/rna-arancio/datasets/RNA17-0180-R0001_R2.fastq.gz
+samples: "/u/rajeshpal93/scratch/test_run/lncrna/newrides/ride/samples.tsv"
+units: "/u/rajeshpal93/scratch/test_run/lncrna/newrides/ride/units.tsv"
+
+read_type: "pe"
