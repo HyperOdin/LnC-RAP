@@ -1,2 +1,2 @@
 # LnC-RAP
-LncRNA analysis pipeline for NGS LncRNA data Analysis
+Analysis pipeline for NGS LncRNA data Analysis
