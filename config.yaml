@@ -4,48 +4,31 @@ references:
     release: "hg19"
 genome_fasta: "ucsc.hg19.fasta"
 genes_gtf: "Annotation/Genes/genes.gtf"
+genes_gff: "/u/rajeshpal93/scratch/test_run/lncrna/newrides/LnC-RAP/lncipedia_5_2_hc_hg19.gff"
 #tx2gene_hsa: "rna/tx2gene_hsa.RData"
 
-rseqc_reference:
-    basepath: "/ELS/els9/users/biosciences/references/"
-    provider: "rseqc"
-    release: "hg19"
-housekeeping: "hg19.HouseKeepingGenes.bed"
-refseq: "hg19_RefSeq.bed"
-
-transcriptome_reference:
-    basepath: "/ELS/els9/users/biosciences/references"
-    provider: "ensembl"
-    release: "GRCh38"
-transcriptome_fasta: "Homo_sapiens.GRCh38.cdna.all.fa.gz"
+#transcriptome_reference:
+#    basepath: "/ELS/els9/users/biosciences/references"
+#    provider: "ensembl"
+#    release: "GRCh38"
+#transcriptome_fasta: "Homo_sapiens.GRCh38.cdna.all.fa.gz"
 
 strand: "reverse"
 
 rules:
-    sleuth_run:
-        database: "ensembl"
-        dataset: "hsapiens_gene_ensembl"
-        version: 90
     multiqc:
         arguments: "--force "
     featureCounts_run:
-        gtf_feature_type: "exon"
-        gtf_attribute_type: "gene_id"
-    kallisto:
-        arguments_pe: ""
-        arguments_se: "--single -b 30 -l 280 -s 80 "
+        gtf_feature_type1: "exon"
+        gtf_feature_type2: "lnc_RNA"
     trim_galore_pe:
         arguments: "-q 20"
     trim_galore_se:
         arguments: "-q 20"
-    fastq_screen:
-        params: "--force --aligner bowtie2 --subset 100000 --nohits"
-        config_file: "../data/fastq_screen.config"
-
 wrappers:
-    fastqc: "/ELS/els9/users/biosciences/references/snakemake-wrappers/bio/fastqc"
-    #trim_galore_se: ""
-    trim_galore_pe: "/ELS/els9/users/biosciences/references/snakemake-wrappers/bio/trim_galore/pe"
+    fastqc: "/u/rajeshpal93/smallrna-columbano/wrappers/bio/fastqc"
+    trim_galore_se: "/u/rajeshpal93/smallrna-columbano/wrappers/bio/trim_galore/se"
+    trim_galore_pe: "/u/rajeshpal93/smallrna-columbano/wrappers/bio/trim_galore/pe"
 
 samples: "/u/rajeshpal93/scratch/test_run/lncrna/newrides/ride/samples.tsv"
 units: "/u/rajeshpal93/scratch/test_run/lncrna/newrides/ride/units.tsv"
