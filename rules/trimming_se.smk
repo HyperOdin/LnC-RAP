@@ -10,12 +10,10 @@ rule pre_rename_fastq_se:
     shell:
         "ln -s {input.r1} {output.r1}"
 
-
-
-
 rule trim_galore_se:
     input:
-        "reads/untrimmed/merged/{sample}-R1.fq.gz"
+#        lambda wildcards: get_fastq(wildcards, samples, read_pair="fq1")
+        "reads/untrimmed/{sample}-R1.fq.gz"
     output:
         "reads/trimmed/{sample}-R1_trimmed.fq.gz",
         "reads/trimmed/{sample}-R1.fq.gz_trimming_report.txt"

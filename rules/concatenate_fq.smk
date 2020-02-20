@@ -19,7 +19,3 @@ rule fastq_merge_r2:
         "reads/untrimmed/merged/{sample}-R2.fq.gz"
     script:
         "scripts/merge_units.py"
-
-
-
-

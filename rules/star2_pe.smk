@@ -1,4 +1,3 @@
-
 rule star_build_index:
     input:
         resolve_single_filepath(*references_abs_path(), config.get("genome_fasta"))

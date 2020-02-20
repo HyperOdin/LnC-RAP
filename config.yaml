@@ -30,7 +30,7 @@ wrappers:
     trim_galore_se: "/u/rajeshpal93/smallrna-columbano/wrappers/bio/trim_galore/se"
     trim_galore_pe: "/u/rajeshpal93/smallrna-columbano/wrappers/bio/trim_galore/pe"
 
-samples: "/u/rajeshpal93/scratch/test_run/lncrna/newrides/ride/samples.tsv"
-units: "/u/rajeshpal93/scratch/test_run/lncrna/newrides/ride/units.tsv"
+samples: "/u/rajeshpal93/scratch/test_run/lncrna/LnC-RAP/samples.tsv"
+units: "/u/rajeshpal93/scratch/test_run/lncrna/LnC-RAP/units.tsv"
 
 read_type: "pe"

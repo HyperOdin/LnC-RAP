@@ -18,16 +18,6 @@ rule star_build_index:
         "--sjdbGTFfile {params.gtf} "
         "--sjdbOverhang 100"
 
-
-def fastq_input(r1):
-    if config.get("read_type")=="se":
-        return r1
-    else:
-        r2=r1.replace("-R1-", "-R2-")
-        reads=[r1,r2]
-        return " ".join(reads)
-
-
 rule star_map:
     input:
         "reads/trimmed/{sample}-R1-trimmed.fq.gz",

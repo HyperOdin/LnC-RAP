@@ -1,7 +1,7 @@
-
 rule bbmap_qchist_r1:
     input:
-        "reads/untrimmed/merged/{sample}-R1.fq.gz"
+#lambda wildcards: get_fastq(wildcards, samples, read_pair="fq1")        
+        "reads/untrimmed/{sample}-R1.fq.gz"
     output:
         "qc/bbmap_qchist/{sample}-R1.fq.gz.qchist"
     conda:
@@ -16,7 +16,7 @@ rule bbmap_qchist_r1:
 
 rule bbmap_qchist_r2:
     input:
-        "reads/untrimmed/merged/{sample}-R2.fq.gz"
+        "reads/untrimmed/{sample}-R2.fq.gz"
     output:
         "qc/bbmap_qchist/{sample}-R2.fq.gz.qchist"
     conda:

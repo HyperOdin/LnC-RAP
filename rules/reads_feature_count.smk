@@ -46,14 +46,24 @@ rule featureCountsLnc_run:
 
 rule merge:
     input:
-        "star/{sample}/count/{sample}_featurecountsexon.cnt",
-        "star/{sample}/count/{sample}_featurecountslnc.cnt" 
+        "featurecounts/{sample}/count/{sample}_featurecountsexon.cnt",
+        "featurecounts/{sample}/count/{sample}_featurecountslnc.cnt" 
     output:
-        "featurecounts/final_count/{sample}/featurecounts.cnt"
+        "featurecounts/final_count/{sample}_featurecounts.cnt"
     shell:
         """
           cat {input} > {output}
         """
+
+rule filter:
+    input:
+        "featurecounts/final_count/{sample}_featurecounts.cnt"
+    output:
+        "featurecounts/filtered/{sample}.counts"
+    shell:
+        """
+          awk '{{print $1 "\t" $7}}' {input} > {output} 
+        """  
 
 #rule HTSeq_run:
 #    input:
